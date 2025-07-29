@@ -1,1 +1,1 @@
-# woting-web
+# voting-web
