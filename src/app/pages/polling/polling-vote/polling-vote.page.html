@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (dataSource) {
+    <div class="ion-margin-top">
+      <ion-card-header>
+        <ion-card-subtitle>{{ dataSource.name }}</ion-card-subtitle>
+        <ion-card-title>{{ dataSource.question }}</ion-card-title>
+      </ion-card-header>
+
+      <!-- FORM VOTING -->
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="selectedOptionId" [ngModelOptions]="{ standalone: true }">
+          <ion-item *ngFor="let option of dataSource?.options">
+            <ion-radio labelPlacement="end" justify="start" [value]="option.optionId">
+              {{ option.name }}
+            </ion-radio>
+          </ion-item>
+          <div class="add-other ion-margin-top" (click)="addOptions()">+ Add Other Option</div>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-button expand="block" class="mt-3" [disabled]="!selectedOptionId()" (click)="submitVote()" mode="ios">
+        {{ hasVoted ? 'Resend' : 'Vote' }}
+      </ion-button>
+    </div>
+  } @else {
+    <app-empty-state></app-empty-state>
+  }
+</ion-content>
